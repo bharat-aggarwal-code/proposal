@@ -8,6 +8,7 @@ const confirmMessage = document.querySelector(".confirm-message");
 const yesBtn = document.querySelector(".yes-btn");
 const noBtn = document.querySelector(".no-btn");
 const noHint = document.querySelector(".no-hint");
+let heartTimers = [];
 
 function openFrame() {
 	greetingScreen.classList.add("hidden");
@@ -30,6 +31,9 @@ function closeFrame() {
   // reset hint
   noHint.textContent = "Go on… try saying no 😏";
   noHint.classList.remove("angry");
+
+  // reset yes sumbmission
+  stopHeartRain();
 }
 
 function minimizeFrame() {
@@ -42,9 +46,19 @@ close.addEventListener("click", closeFrame);
 minimize.addEventListener("click", minimizeFrame);
 
 function startHeartRain() {
+  heartTimers = [];
+
   for (let i = 0; i < 120; i++) {
-    setTimeout(createHeart, i * 150);
+    const timer = setTimeout(createHeart, i * 150);
+    heartTimers.push(timer);
   }
+}
+
+function stopHeartRain() {
+  heartTimers.forEach(t => clearTimeout(t));
+  heartTimers = [];
+
+  document.querySelectorAll(".heart").forEach(h => h.remove());
 }
 
 function createHeart() {
@@ -78,6 +92,10 @@ noBtn.addEventListener("pointerenter", () => {
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
+
+  const speed = window.innerWidth < 768 ? 0.15 : 0.25;
+  noBtn.style.transition = `left ${speed}s ease, top ${speed}s ease`;
+
 });
 
 noBtn.addEventListener("click", () => {
