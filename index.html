@@ -2,17 +2,40 @@
 <html>
 <head>
   <title>Valentine Proposal</title>
-  <link src="style.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <div class="frame">
-      <section class="screen">
-        <h1 class="greeting">Hi, you have a message👇🏻</h1>
-        <img src="image.jpg" alt="inbox envelop">
-      <section>
-    <div>
-  </div>
+    <section class="greeting-screen">
+      <h1 class="greeting">Hi, you have a message👇🏻</h1>
+      <p class="hint">Tap the envelope 💌</p>
+      <img src="envelop.png" alt="envelop with heart" class="envelop" width="150px">
+    </section>
+    <div class="frame hidden">
+      <div class="window-title-bar">
+        <p class="window-title">Your Message</p>
+        <div class="window-controls">
+          <img src="minimize.png" alt="minimize" class="minimize" width="30">
+          <img src="close.png" alt="close" class="close" width="30">
+        </div>
+      </div>
+      <div class="content">
+        <section class="screen question">
+          <h1 class="greeting">Will you be my Valentine?</h1>
+          <div class="confirm-btn">
+            <button class="button yes-btn">Yes</button>
+            <button class="button no-btn">No</button>
+          </div>
+        </section>
+        <section class="screen confirm-message hidden">
+          <p>I love you so much💖</p>
+        </section>
+      </div>
+    </div>
+  </div> 
   <script src="script.js"></script>
 </body>
 </html>
