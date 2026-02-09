@@ -1,33 +1,67 @@
 const greetingScreen = document.querySelector(".greeting-screen");
 const envelop = document.querySelector(".envelop");
 const frame = document.querySelector(".frame");
-const screen = document.querySelector(".screen");
 const minimize = document.querySelector(".minimize");
 const close = document.querySelector(".close");
 const question = document.querySelector(".question");
 const confirmMessage = document.querySelector(".confirm-message");
 const yesBtn = document.querySelector(".yes-btn");
 const noBtn = document.querySelector(".no-btn");
+const noHint = document.querySelector(".no-hint");
 
-envelop.addEventListener("click", function () {
+function openFrame() {
 	greetingScreen.classList.add("hidden");
 	frame.classList.remove("hidden");
+};
 
-});
+function closeFrame() {
+  frame.classList.add("hidden");
+  greetingScreen.classList.remove("hidden");
 
-close.addEventListener("click", function () {
+  // reset screens
+  question.classList.remove("hidden");
+  confirmMessage.classList.add("hidden");
+
+  // reset NO button
+  noBtn.classList.remove("run", "no-exit");
+  noBtn.style.left = "";
+  noBtn.style.top = "";
+
+  // reset hint
+  noHint.textContent = "Go on… try saying no 😏";
+  noHint.classList.remove("angry");
+}
+
+function minimizeFrame() {
 	frame.classList.add("hidden");
 	greetingScreen.classList.remove("hidden");
-});
+};
 
-minimize.addEventListener("click", function () {
-	frame.classList.add("hidden");
-	greetingScreen.classList.remove("hidden");
-});
+envelop.addEventListener("click", openFrame);
+close.addEventListener("click", closeFrame);
+minimize.addEventListener("click", minimizeFrame);
+
+function startHeartRain() {
+  for (let i = 0; i < 120; i++) {
+    setTimeout(createHeart, i * 150);
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "💘";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 3000);
+}
 
 yesBtn.addEventListener("click", function () {
 	question.classList.add("hidden");
 	confirmMessage.classList.remove("hidden");
+
+	startHeartRain();
 });
 
 noBtn.addEventListener("pointerenter", () => {
@@ -44,4 +78,14 @@ noBtn.addEventListener("pointerenter", () => {
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
+});
+
+noBtn.addEventListener("click", () => {
+  noBtn.classList.add("no-angry", "no-exit");
+  noHint.textContent = "😈 No is not an option!";
+  noHint.classList.add("angry");
+
+  // move it outside the frame
+  noBtn.style.left = "-250px";
+  noBtn.style.top = "-250px";
 });

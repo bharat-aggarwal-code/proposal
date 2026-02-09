@@ -31,10 +31,6 @@
 	opacity: 0.8;
 }
 
-.envelop {
-	animation: pulse 1.5s infinite;
-}
-
 .frame {
 	width: 70%;
 	height: 80%;
@@ -90,6 +86,12 @@
 	line-height: 1.4;
 }
 
+.subtext {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: -10px;
+}
+
 .confirm-btn {
 	width: 70%;
 	display: flex;
@@ -117,12 +119,73 @@
 
 .run {
 	position: absolute;
+	transition: left 0.25s ease, top 0.25s ease;
+}
+
+.no-exit {
+  background-color: #e63946;
+  font-weight: bold;
+  transition: 
+    left 2s ease-in-out,
+    top 2s ease-in-out,
+    background-color 1.5s ease,
+    opacity 2s ease;
+  opacity: 0.4;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+.no-hint {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.no-hint.angry {
+  color: #d33;
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .confirm-message {
 	color: #c46b84;
 	font-size: 1.5rem;
 	line-height: 1.6;
+}
+
+.heart {
+  position: fixed;
+  top: -20px;
+  font-size: 20px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+.confirm-main {
+  font-size: 1.6rem;
+}
+
+.confirm-sub {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-top: 10px;
 }
 
 .hidden {
